@@ -8,7 +8,7 @@ const token = require("./token.json")
 // put your own infura key here
 const web3 = new Web3('wss://mainnet.infura.io/ws/v3/your_infura_key');
  // define global variables
- const collectionAdress = ""; // exemple : 0x28AaF29992B43e093A7D883c7427bd1fF4a6665b     is Dark Taverns
+ const collectionAdress = ""; // exemple : 0x28AaF29992B43e093A7D883c7427bd1fF4a6665b  | is Dark Taverns collection
  const collectionName = "";  // exemple : Dark Taverns
  const discordChannel = ""; // exemple : 739518433779122191
 // if your collection have mp4 we can't put in discord so we put a static img
@@ -55,13 +55,13 @@ client.on('ready', () => {
         var to = transaction.to;
         var tokenId = transaction.tokenId;
 
-        // with token id, get the token uri
+        // with token id, get the token url 
 
+        // get the transaction price (eth ou weth) 
 
         // get the transaction price
         web3.eth.getTransaction(event.transactionHash).then((transaction) => {
-            // if the price is > 0 it's a buy, else it's a transfer and we print nothing
-            if (web3.utils.fromWei(transaction.value, 'ether') > 0) {
+            var price = web3.utils.fromWei(transaction.value, 'ether');
                 // print the transaction on discord
                 const channel = client.channels.cache.get(discordChannel);
                 const embed8 = new Discord.MessageEmbed()
@@ -69,7 +69,7 @@ client.on('ready', () => {
                 .setURL('https://opensea.io/assets/'+collectionAdress+'/'+tokenId)
                 .addFields(
                     { name: 'Item : ', value: collectionName+' #'+tokenId+''},
-                    { name: 'Price : ' , value: '' + web3.utils.fromWei(transaction.value, 'ether') + ' ETH ($)'},
+                    { name: 'Price : ' , value: '' + price + ' ETH ($)'},
                     { name: 'From : ', value: '['+from.substring(0, 6)+'...'+from.substring(38, 42)+'](https://opensea.io/accounts/'+from+')', inline: true},
                     { name: 'To : ', value: '['+to.substring(0, 6)+'...'+from.substring(38, 42)+'](https://opensea.io/accounts/'+to+')', inline: true},
                 )
@@ -77,9 +77,6 @@ client.on('ready', () => {
                 .setFooter(collectionName+' | '+new Date().toLocaleDateString('en-EN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }))
                 .setColor('RANDOM')
                 channel.send(embed8)
-            } else {
-                // do nothing
-            }
         });
     }
 })
