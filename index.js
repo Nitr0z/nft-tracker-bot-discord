@@ -6,12 +6,13 @@ const Web3 = require('web3');
 // get your discord bot token from https://discord.com/developers/applications
 const token = require("./token.json")
 // put your own infura key here
-const web3 = new Web3('wss://mainnet.infura.io/ws/v3/a7d1163123a14aa88c936edaf6b3f114');
+const web3 = new Web3('wss://mainnet.infura.io/ws/v3/your_infura_key');
  // define global variables
- const collectionAdress = "0x28AaF29992B43e093A7D883c7427bd1fF4a6665b";
- const collectionName = "Dark Taverns";
- const collectionImg = "https://media.discordapp.net/attachments/739518433779122191/1022907541715439636/taverns.png?width=1193&height=671";
- const discordChannel = "739518433779122191";
+ const collectionAdress = ""; // exemple : 0x28AaF29992B43e093A7D883c7427bd1fF4a6665b     is Dark Taverns
+ const collectionName = "";  // exemple : Dark Taverns
+ const discordChannel = ""; // exemple : 739518433779122191
+// if your collection have mp4 we can't put in discord so we put a static img
+ const collectionImg = "";
 
 
 
