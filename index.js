@@ -35,7 +35,7 @@ client.on('ready', () => {
   // regarder toutes les 5 mins s'il y à une nouvelle transaction sur l'adresse 0x4510ef604e0595f7151adcba0b958d39b8b16d40
 //  setInterval(async function(){
     var subscription = web3.eth.subscribe('logs', {
-      address: '0x4510Ef604e0595F7151aDCBA0B958d39b8B16D40',
+      address: '0x28AaF29992B43e093A7D883c7427bd1fF4a6665b',
   });
 
   subscription.on('data', event => {
@@ -68,6 +68,8 @@ client.on('ready', () => {
         var to = transaction.to;
         var tokenId = transaction.tokenId;
 
+        // grace au token id, on peut récupérer le lien vers l'image du token
+
 
         // récuperer le prix de la transaction
         web3.eth.getTransaction(event.transactionHash).then((transaction) => {
@@ -81,11 +83,13 @@ client.on('ready', () => {
             .addFields(
                 { name: 'Item : ', value: 'Dark Taverns #'+tokenId+''},
                 { name: 'Price : ' , value: '' + web3.utils.fromWei(transaction.value, 'ether') + ' ETH ($)'},
-                { name: 'From : ', value: '' +from+ '', inline: true},
-                { name: 'To : ', value: '' +to+ '', inline: true},
+                // from avec l'url vers opensea et écrire que quelques caracteres
+                { name: 'From : ', value: '['+from.substring(0, 6)+'...'+from.substring(38, 42)+'](https://opensea.io/accounts/'+from+')'},
+                // to avec l'url vers opensea
+                { name: 'To : ', value: '['+to.substring(0, 6)+'...'+from.substring(38, 42)+'](https://opensea.io/accounts/'+to+')'},
             )
             // ajouter l'image 
-            .setImage('https://images-ext-1.discordapp.net/external/6duDU5N4AmMfhbPRK75syzwwXqjWVbPtwgI9oHQE6o0/https/miro.medium.com/max/1200/1%2AgUTWfOQ5baxs4H8NJ-Z1vA.png?width=671&height=671')
+            .setImage('https://media.discordapp.net/attachments/739518433779122191/1022907541715439636/taverns.png?width=1193&height=671')
             // footer afficher nom collection & date du jour en anglais
             .setFooter('Dark Taverns | '+new Date().toLocaleDateString('en-EN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }))
             .setColor('RANDOM')
