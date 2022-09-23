@@ -83,10 +83,6 @@ client.on('ready', () => {
                 
                 async function getNFTMetadata() {
                     const result = await contract.methods.tokenURI(tokenId2).call()
-                
-                    console.log(result); // ipfs://QmeSjSinHpPnmXmspMjwiXyN6zS4E9zccariGR3jxcaWtq/101
-                
-                    
                     // get the image_url in json from result
                     const url = result;
                     axios.get(url)
