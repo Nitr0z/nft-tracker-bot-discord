@@ -8,7 +8,7 @@ const token = require("./token.json")
 // put your own infura key here
 const web3 = new Web3('wss://mainnet.infura.io/ws/v3/your_infura_key');
  // define global variables
- const collectionAdress = ""; // exemple : 0x28AaF29992B43e093A7D883c7427bd1fF4a6665b  | is Dark Taverns collection
+ const collectionAdress = ""; // exemple : 0x4510Ef604e0595F7151aDCBA0B958d39b8B16D40  | is Dark Taverns collection
  const collectionName = "";  // exemple : Dark Taverns
  const discordChannel = ""; // exemple : 739518433779122191
 // if your collection have mp4 we can't put in discord so we put a static img
