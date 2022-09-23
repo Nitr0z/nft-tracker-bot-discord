@@ -7,10 +7,9 @@ const Web3 = require('web3');
 const token = require("./token.json")
 // put your own infura key here
 const web3 = new Web3('wss://mainnet.infura.io/ws/v3/your_infura_key');
- // define global variables
- const collectionAdress = ""; // exemple : 0x4510Ef604e0595F7151aDCBA0B958d39b8B16D40  | is Dark Taverns collection
- const collectionName = "";  // exemple : Dark Taverns
- const discordChannel = ""; // exemple : 739518433779122191
+// define global variables
+const collectionAdress = ""; // exemple : 0x4510Ef604e0595F7151aDCBA0B958d39b8B16D40  | is Dark Taverns collection
+const discordChannel = ""; // exemple : 739518433779122191
 
 
 
@@ -46,6 +45,7 @@ if (event.topics.length == 4) {
     }],
         event.data,
         [event.topics[1], event.topics[2], event.topics[3]]);
+
 
 
     // put in variables
@@ -86,6 +86,9 @@ if (event.topics.length == 4) {
             .then(response => {
                 var img = response.data.image;
 
+                // get the name of collection
+                const collectionName = response.data.name;
+
                 // if img start with ipfs:// then add https://cloudflare-ipfs.com/ipfs/ to the url
                 if (img.startsWith("ipfs://")) {
                     img = img.replace("ipfs://", "https://cloudflare-ipfs.com/ipfs/"+img.substring(7));
@@ -104,13 +107,14 @@ if (event.topics.length == 4) {
                     .then(response => {
                         var ethPrice = response.data.ethereum.usd;
                         var price2 = price * ethPrice;
+                        price2 = price2.toFixed(2);
                         // print the transaction on discord
                         const channel = client.channels.cache.get(discordChannel);
                         const embed8 = new Discord.MessageEmbed()
-                        .setTitle('**'+collectionName+' #'+tokenId+'** has been sold !')
+                        .setTitle('**'+collectionName+'** has been sold !')
                         .setURL('https://opensea.io/assets/'+collectionAdress+'/'+tokenId)
                         .addFields(
-                            { name: 'Item : ', value: collectionName+' #'+tokenId+''},
+                            { name: 'Item : ', value: collectionName},
                             { name: 'Price : ' , value: '' + price + ' ETH ('+price2+'$)'},
                             { name: 'From : ', value: '['+from.substring(0, 6)+'...'+from.substring(38, 42)+'](https://opensea.io/accounts/'+from+')', inline: true},
                             { name: 'To : ', value: '['+to.substring(0, 6)+'...'+from.substring(38, 42)+'](https://opensea.io/accounts/'+to+')', inline: true},
@@ -126,5 +130,3 @@ if (event.topics.length == 4) {
         getNFTMetadata();
     }
 })
-  
-  
