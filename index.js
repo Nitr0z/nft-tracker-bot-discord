@@ -89,7 +89,7 @@ client.on('ready', () => {
                         .then(response => {
                             var img = response.data.image;
         
-                            // si img commence par ipfs:// alors on le transforme en https://cloudflare-ipfs.com/ipfs/
+                            // if img start with ipfs:// then add https://cloudflare-ipfs.com/ipfs/ to the url
                             if (img.startsWith("ipfs://")) {
                                 img = img.replace("ipfs://", "https://cloudflare-ipfs.com/ipfs/"+img.substring(7));
                             } else {
