@@ -6,7 +6,7 @@ It's a discord bot (javascript) that allows you to display an embed in your disc
  
  ---
 
-#### Node installation on Ubuntu
+### Node installation on Ubuntu
 
   You can install nodejs and npm easily with apt install, just run the following commands.
 
@@ -17,7 +17,6 @@ It's a discord bot (javascript) that allows you to display an embed in your disc
   You can find more information about the installation on the [official Node.js website](https://nodejs.org/) and the [official NPM website](https://npmjs.org/).
 
 
-###
 ### Yarn installation
   After installing node, this project will need yarn too, so just run the following command.
 
