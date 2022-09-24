@@ -55,7 +55,7 @@ var subscription = web3.eth.subscribe('logs', {address: collectionAdress});
         if (to == "0x0000000000000000000000000000000000000000") {
             // do nothing
          } else {
-            setTimeout(nft, 30000); // wait 30s before getting the metadata
+            setTimeout(nft, 15000); // wait 15s before getting the metadata
             function nft() {
             // with tokenid & collection adress get the metadata of the token on https://api.opensea.io/asset/collectionadress/tokenid
             axios.get('https://api.opensea.io/asset/' + collectionAdress + '/' + tokenId)

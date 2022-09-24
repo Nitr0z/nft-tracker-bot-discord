@@ -37,8 +37,9 @@ __Exemple :__
     
     
 ## (Server 🎛️ & Localhost 💻) Edit your information
+Edit your information in token.js and index.js:
 
-    $ Edit your information in token.js and index.js:
+    $ token.js (https://discord.com/developers/applications)
     $ API Infura (https://infura.io/create-project) choose "Web3 API"
     $ CollectionAddress
     $ DiscordChannel
