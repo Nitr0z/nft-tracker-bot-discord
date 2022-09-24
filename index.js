@@ -13,120 +13,107 @@ const discordChannel = ""; // exemple : 739518433779122191
 
 
 
-// ----------------------------------------------------------------------------------------------------------------------------------------------------------
-client.on('ready', () => {
-console.log('Bot ok');
-});
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------------
+  client.on('ready', () => {
+    console.log('Bot ok');
+  });
 
-client.login(token.token);
+  client.login(token.token);
 
 
 // subscrirbe to the contract events
-var subscription = web3.eth.subscribe('logs', {
-    address: collectionAdress,
-});
+    var subscription = web3.eth.subscribe('logs', {
+      address: collectionAdress,
+  });
 
-// after subscription is created, start listening for data
-subscription.on('data', event => {
-// check if the event is a transfer or buy(length = 4) else it is a mint
-if (event.topics.length == 4) {
-    let transaction = web3.eth.abi.decodeLog([{
-        type: 'address',
-        name: 'from',
-        indexed: true
-    }, {
-        type: 'address',
-        name: 'to',
-        indexed: true
-    }, {
-        type: 'uint256',
-        name: 'tokenId',
-        indexed: true
-    }],
-        event.data,
-        [event.topics[1], event.topics[2], event.topics[3]]);
+  // after subscription is created, start listening for data
+  subscription.on('data', event => {
+    // check if the event is a transfer or buy(length = 4) else it is a mint
+    if (event.topics.length == 4) {
+        let transaction = web3.eth.abi.decodeLog([{
+            type: 'address',
+            name: 'from',
+            indexed: true
+        }, {
+            type: 'address',
+            name: 'to',
+            indexed: true
+        }, {
+            type: 'uint256',
+            name: 'tokenId',
+            indexed: true
+        }],
+            event.data,
+            [event.topics[1], event.topics[2], event.topics[3]]);
 
 
 
-    // put in variables
-    var from = transaction.from;
-    var to = transaction.to;
-    var tokenId = transaction.tokenId;
+        // put in variables
+        var from = transaction.from;
+        var to = transaction.to;
+        var tokenId = transaction.tokenId;
 
-    // with token id, get the token url 
-    const tokenURIABI = [
-        {
-            "inputs": [
-                {
-                    "internalType": "uint256",
-                    "name": "tokenId",
-                    "type": "uint256"
-                }
-            ],
-            "name": "tokenURI",
-            "outputs": [
-                {
-                    "internalType": "string",
-                    "name": "",
-                    "type": "string"
-                }
-            ],
-            "stateMutability": "view",
-            "type": "function"
-        }
-    ];
-    
-    const contract = new web3.eth.Contract(tokenURIABI, collectionAdress )
-    
-    async function getNFTMetadata() {
-        const result = await contract.methods.tokenURI(tokenId).call()
-        // get the image_url in json from result
-        const url = result;
-        axios.get(url)
-            .then(response => {
-                var img = response.data.image;
+        function nft() {
+        // with tokenid & collection adress get the metadata of the token on https://api.opensea.io/asset/collectionadress/tokenid
+        axios.get('https://api.opensea.io/asset/' + collectionAdress + '/' + tokenId)
+            .then(function (response) {
+                // put in variables
+                var collectionName = response.data.asset_contract.name;
+                var img = response.data.image_url;
 
-                // get the name of collection
-                const collectionName = response.data.name;
+                // get collection logo in asset_contract -> image_url
+                var collectionLogo = response.data.asset_contract.image_url;
 
-                // if img start with ipfs:// then add https://cloudflare-ipfs.com/ipfs/ to the url
-                if (img.startsWith("ipfs://")) {
-                    img = img.replace("ipfs://", "https://cloudflare-ipfs.com/ipfs/"+img.substring(7));
-                } else {
+                // if last_sale is null, it is a mint or transfer
+                if (response.data.last_sale == null) {
                     // do nothing
-                }
+                } else {
+                    // check if last_sale is under 10min ago
+                    var lastSale = response.data.last_sale.created_date;
+                    var now = new Date();
+                    var lastSaleDate = new Date(lastSale);
+                    // add 2h to last sale date
+                    lastSaleDate.setHours(lastSaleDate.getHours() + 2);
+                    var diff = (now - lastSaleDate);
 
-                // get the transaction price (eth ou weth) 
+                    if (diff < 600000) {
+                        // get last_sale total_price & symbol
+                        var price = response.data.last_sale.total_price;
+                        var symbol = response.data.last_sale.payment_token.symbol;
 
-                // get the transaction price
-                web3.eth.getTransaction(event.transactionHash).then((transaction) => {
-                    var price = web3.utils.fromWei(transaction.value, 'ether');
-                    // convert the eth amount to usd
-                    const url = "https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd";
-                    axios.get(url)
-                    .then(response => {
-                        var ethPrice = response.data.ethereum.usd;
-                        var price2 = price * ethPrice;
-                        price2 = price2.toFixed(2);
+                        // convert price to eth
+                        var price2 = web3.utils.fromWei(price, 'ether');
+                        // convert the eth amount to usd
+                        var ethPrice = response.data.last_sale.payment_token.usd_price;
+                        var price3 = price2 * ethPrice;
+                        price3 = price3.toFixed(2);
+
+                        // if img start with ipfs:// then add https://cloudflare-ipfs.com/ipfs/ to the url
+                        if (img.startsWith("ipfs://")) {
+                            img = img.replace("ipfs://", "https://cloudflare-ipfs.com/ipfs/"+img.substring(7));
+                        } else {
+                            // do nothing
+                        }
                         // print the transaction on discord
                         const channel = client.channels.cache.get(discordChannel);
                         const embed8 = new Discord.MessageEmbed()
-                        .setTitle('**'+collectionName+'** has been sold !')
+                        .setTitle('**'+collectionName+' #'+tokenId+'** has been sold !')
                         .setURL('https://opensea.io/assets/'+collectionAdress+'/'+tokenId)
                         .addFields(
-                            { name: 'Item : ', value: collectionName},
-                            { name: 'Price : ' , value: '' + price + ' ETH ('+price2+'$)'},
+                            { name: 'Item : ', value: collectionName+' #'+tokenId},
+                            { name: 'Price : ' , value: '' + price2 + ' '+symbol+' ('+price3+'$)'},
                             { name: 'From : ', value: '['+from.substring(0, 6)+'...'+from.substring(38, 42)+'](https://opensea.io/accounts/'+from+')', inline: true},
                             { name: 'To : ', value: '['+to.substring(0, 6)+'...'+from.substring(38, 42)+'](https://opensea.io/accounts/'+to+')', inline: true},
                         )
                         .setImage(img)
-                        .setFooter(collectionName+' | '+new Date().toLocaleDateString('en-EN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }))
+                        .setTimestamp()
+                        .setFooter(collectionName, collectionLogo)
                         .setColor('RANDOM')
                         channel.send(embed8)
-                });
+                    }
+                }
             })
-        })
         }
-        getNFTMetadata();
-    }
-})
+        }
+        setTimeout(nft, 30000); // wait 30s before getting the metadata
+    })
