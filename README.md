@@ -6,7 +6,7 @@ Everything is automatic, you just have to create a discord bot &amp; get an Infu
 
 Working on ERC721 collection.
 
-Exemple : 
+__Exemple :__
 
 
  ![image](https://media.discordapp.net/attachments/854840063988203570/1023270706089308170/sale1.png)
