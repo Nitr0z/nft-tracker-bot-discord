@@ -1,8 +1,12 @@
 # NFT tracker bot 🦾
 
-It's a discord bot (javascript) that allows you to display an embed in your discord server each time there is a purchase on the collection of your choice. 
+It's a discord nft sales tracker.
+
+It is an open source project (Nodejs) that allows you to display an embed in your discord server each time there is a purchase on the collection of your choice. 
 
 Everything is automatic, you just have to create a discord bot &amp; get an Infura API key.
+
+It collects sales from opensea, magic eden, gem...
 
 Working on ERC721 collection.
 
@@ -12,6 +16,11 @@ __Exemple :__
  ![image](https://media.discordapp.net/attachments/854840063988203570/1023270706089308170/sale1.png)
  ![image](https://media.discordapp.net/attachments/854840063988203570/1023312319536697465/sale3.png)
  
+ 
+__Tutorial :__
+
+https://www.youtube.com/watch?v=TvMOD3AKkXo&ab_channel=Nitr0z
+
  ---
 
 ### (Server 🎛️) Node installation on Ubuntu 
