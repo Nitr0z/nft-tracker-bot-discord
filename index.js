@@ -51,7 +51,6 @@ var subscription = web3.eth.subscribe('logs', {address: collectionAdress});
         var to = transaction.to;
         var tokenId = transaction.tokenId;
 
-        console.log("Transfer : " + from + " -> " + to + " | tokenId : " + tokenId);
         // if transfert goes to 0x0000000000000000000000000000000000000000 do nothing
         if (to == "0x0000000000000000000000000000000000000000") {
             // do nothing
