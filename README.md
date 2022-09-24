@@ -27,7 +27,7 @@ It's a discord bot (javascript) that allows you to display an embed in your disc
     $ yarn install
     
     
-## Project Install
+## Edit your information
 
     $ Edit your information in token.js and index.js:
     $ API Infura
@@ -35,7 +35,18 @@ It's a discord bot (javascript) that allows you to display an embed in your disc
     $ DiscordChannel
 
 
-## Install PM2 for launch Bot
+## Install PM2 to launch the bot
 
     $ sudo npm install pm2 -g
     $ pm2 start index.js
+    
+    
+ ---
+ 
+ ## Now enjoy
+ 
+ ![image](https://media.discordapp.net/attachments/854840063988203570/1023187640117362738/sale1.png)
+ ![image](https://user-images.githubusercontent.com/48621976/192094640-23101e13-eb86-4a1c-bfca-7a9584ab6e00.png)
+
+ 
+ 
