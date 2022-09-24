@@ -22,14 +22,14 @@ Everything is automatic, you just have to create a discord bot &amp; get an Infu
 
 ---
 
-## (Server or Local 💻) Project Install
+## (Server & Localhost 💻) Project Install
 
     $ git clone https://github.com/Nitr0z/nft-tracker-bot
     $ cd nft-tracker-bot
     $ yarn install
     
     
-## (Server 🎛️ or Local 💻) Edit your information
+## (Server 🎛️ & Localhost 💻) Edit your information
 
     $ Edit your information in token.js and index.js:
     $ API Infura
@@ -43,7 +43,7 @@ Everything is automatic, you just have to create a discord bot &amp; get an Infu
     $ pm2 start index.js
     
     
-## (Local 💻) Launch the bot 
+## (Localhost 💻) Launch the bot 
 
     $ node index.js
 
