@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 const Web3 = require('web3');
+const axios = require('axios');
 
 // get your discord bot token from https://discord.com/developers/applications
 const token = require("./token.json")
@@ -52,6 +53,8 @@ const discordChannel = ""; // exemple : 739518433779122191
         var from = transaction.from;
         var to = transaction.to;
         var tokenId = transaction.tokenId;
+
+        setTimeout(nft, 30000); // wait 30s before getting the metadata
 
         function nft() {
         // with tokenid & collection adress get the metadata of the token on https://api.opensea.io/asset/collectionadress/tokenid
@@ -115,5 +118,4 @@ const discordChannel = ""; // exemple : 739518433779122191
             })
         }
         }
-        setTimeout(nft, 30000); // wait 30s before getting the metadata
     })
