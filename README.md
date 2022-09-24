@@ -11,17 +11,6 @@ It's a discord bot (javascript) that allows you to display an embed in your disc
 - #### Other Operating Systems
   You can find more information about the installation on the [official Node.js website](https://nodejs.org/) and the [official NPM website](https://npmjs.org/).
 
-If the installation was successful, you should be able to run the following command.
-
-    $ node --version
-    v8.11.3
-
-    $ npm --version
-    6.1.0
-
-If you need to update `npm`, you can make it using `npm`! Cool right? After running the following command, just open again the command line and be happy.
-
-    $ npm install npm -g
 
 ###
 ### Yarn installation
@@ -31,8 +20,22 @@ If you need to update `npm`, you can make it using `npm`! Cool right? After runn
 
 ---
 
-## Install
+## Project Install
 
-    $ git clone https://github.com/YOUR_USERNAME/PROJECT_TITLE
-    $ cd PROJECT_TITLE
+    $ git clone https://github.com/Nitr0z/nft-tracker-bot
+    $ cd nft-tracker-bot
     $ yarn install
+    
+    
+## Project Install
+
+    $ Edit your information in token.js and index.js:
+    $ API Infura
+    $ CollectionAddress
+    $ DiscordChannel
+
+
+## Install PM2 for launch Bot
+
+    $ sudo npm install pm2 -g
+    $ pm2 start index.js
