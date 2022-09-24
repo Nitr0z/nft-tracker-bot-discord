@@ -6,32 +6,29 @@ It's a discord bot (javascript) that allows you to display an embed in your disc
  
  ---
 
-### Node installation on Ubuntu
+### (Server) Node installation on Ubuntu 
 
   You can install nodejs and npm easily with apt install, just run the following commands.
 
       $ sudo apt install nodejs
       $ sudo apt install npm
 
-- #### Other Operating Systems
-  You can find more information about the installation on the [official Node.js website](https://nodejs.org/) and the [official NPM website](https://npmjs.org/).
 
-
-### Yarn installation
+### (Server) Yarn installation
   After installing node, this project will need yarn too, so just run the following command.
 
       $ npm install -g yarn
 
 ---
 
-## Project Install
+## (Server or Local) Project Install
 
     $ git clone https://github.com/Nitr0z/nft-tracker-bot
     $ cd nft-tracker-bot
     $ yarn install
     
     
-## Edit your information
+## (Server or Local) Edit your information
 
     $ Edit your information in token.js and index.js:
     $ API Infura
@@ -39,15 +36,22 @@ It's a discord bot (javascript) that allows you to display an embed in your disc
     $ DiscordChannel
 
 
-## Install PM2 to launch the bot
+## (Server) Install PM2 to launch the bot 
 
     $ sudo npm install pm2 -g
     $ pm2 start index.js
     
     
- ---
+## (Local) Launch the bot 
+
+    $ node index.js
+
+
+---
  
  ## Now enjoy
+ 
+ #### Made with <3 by @Nitr0z
  
 
  
