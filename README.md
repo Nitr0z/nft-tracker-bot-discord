@@ -3,6 +3,7 @@
 It's a discord bot (javascript) that allows you to display an embed in your discord server each time there is a purchase on the collection of your choice. 
 Everything is automatic, you just have to create a discord bot &amp; get an Infura API key.
 
+Exemple : 
  ![image](https://media.discordapp.net/attachments/854840063988203570/1023270706089308170/sale1.png)
  ![image](https://media.discordapp.net/attachments/854840063988203570/1023271110516674650/sale2.png)
  
@@ -33,7 +34,7 @@ Everything is automatic, you just have to create a discord bot &amp; get an Infu
 ## (Server 🎛️ & Localhost 💻) Edit your information
 
     $ Edit your information in token.js and index.js:
-    $ API Infura
+    $ API Infura (https://infura.io/create-project) choose "Web3 API"
     $ CollectionAddress
     $ DiscordChannel
 
