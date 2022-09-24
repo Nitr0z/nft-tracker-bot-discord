@@ -4,6 +4,8 @@ It's a discord bot (javascript) that allows you to display an embed in your disc
 Everything is automatic, you just have to create a discord bot &amp; get an Infura API key.
 
 Exemple : 
+
+
  ![image](https://media.discordapp.net/attachments/854840063988203570/1023270706089308170/sale1.png)
  ![image](https://media.discordapp.net/attachments/854840063988203570/1023271110516674650/sale2.png)
  
