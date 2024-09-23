@@ -13,8 +13,9 @@ Working on ERC721 collection.
 __Exemple :__
 
 
- ![image](https://media.discordapp.net/attachments/854840063988203570/1023270706089308170/sale1.png)
- ![image](https://media.discordapp.net/attachments/854840063988203570/1023312319536697465/sale3.png)
+ ![image](https://github.com/user-attachments/assets/ad5417ff-6f0e-4f65-a1db-55890c2200ab)
+ ![image](https://github.com/user-attachments/assets/0190fb85-bca3-4b72-a3ba-e1a2415816f9)
+
  
  
 __Tutorial :__
